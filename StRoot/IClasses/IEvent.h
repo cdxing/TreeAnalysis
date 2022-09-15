@@ -48,7 +48,7 @@ class IEvent : public TObject {
  public:
 
   IEvent();
-  ~IEvent();
+  virtual ~IEvent();
 
   void ClearEvent();
   void Init();
@@ -93,7 +93,7 @@ class IEvent : public TObject {
   
   void AddEPDtoTracks(TVector3, float);
 
-  ClassDef(IEvent,1)  // my event
+  //ClassDef(IEvent,1)  // my event
 };
 
 #endif

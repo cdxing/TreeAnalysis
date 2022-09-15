@@ -1,7 +1,7 @@
 #include "TMath.h"
 #include "IEventPlane.h"
 
-ClassImp(IEventPlane)
+//ClassImp(IEventPlane)
 
 //______________
 IEventPlane::IEventPlane(){
@@ -16,6 +16,8 @@ IEventPlane::IEventPlane(float in_phi, float in_weight){
 	SetWeight(in_weight);
 	Construct();
 }
+
+IEventPlane::~IEventPlane(){} //This is needed apparently
 
 void IEventPlane::Construct(){
 	mEta = 0.0;

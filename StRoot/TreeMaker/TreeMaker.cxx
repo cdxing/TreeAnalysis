@@ -9,6 +9,7 @@
 
 // Class implementation in CINT
 ClassImp(TreeMaker)
+StRefMultCorr* TreeMaker::mRefMultCorr = NULL;
 
 // Constructor
 TreeMaker::TreeMaker(StPicoDstMaker* Maker, std::string configFileName, TString JobId, Int_t EventsNumber, Double_t inputParameter) : StMaker()
@@ -30,6 +31,12 @@ Int_t TreeMaker::Init()
   if (configs.errorFound()) return kStErr;
 
   outputFile = new TFile(JobIdName,"recreate");
+  // centrality
+  if(!mRefMultCorr)
+  {
+      mRefMultCorr = CentralityMaker::instance()->getRefMultCorr();
+  }
+
   
   // New Tree
   FxtTree = new TTree("Autree","TTree to hold FXT events and tracks");
@@ -140,8 +147,10 @@ Int_t TreeMaker::Make()
 
 	      if(d_zvtx > configs.m_z_vtx_low && d_zvtx < configs.m_z_vtx_high) // Vz cut
 		{ 
+	      	  //h_eventCheck->Fill(3); // Count # of events after z-vertex cut
 		  if(d_rvtx < configs.m_r_vtx) // Vr cut
 		    { 
+	      	      //h_eventCheck->Fill(4); // Count # of events after r-vertex cut
 		      Int_t nTracks = mPicoDstMaker->picoDst()->numberOfTracks(); // Get the number of Primary Tracks
 		      Int_t primTracks = 0;
 
@@ -153,15 +162,23 @@ Int_t TreeMaker::Make()
 			  primTracks++;
 			} // 1st Primary tracks loop ends
 
-		      h_refmult->Fill(event->refMultHalfEast());
+		      //h_refmult->Fill(event->refMultHalfEast());
+		      h_refmult->Fill(event->refMult());
 		      h_trackmult->Fill(primTracks);
 		      h_tofmult->Fill(event->nBTOFMatch());
-		      h2_refmult_vs_trackmult->Fill(primTracks,event->refMultHalfEast());
+		      //h2_refmult_vs_trackmult->Fill(primTracks,event->refMultHalfEast());
+		      h2_refmult_vs_trackmult->Fill(primTracks,event->refMult());
 		      h2_tofmult_vs_trackmult->Fill(primTracks,event->nBTOFMatch());
-		      h2_tofmult_vs_refmult->Fill(event->refMultHalfEast(),event->nBTOFMatch());
+		      //h2_tofmult_vs_refmult->Fill(event->refMultHalfEast(),event->nBTOFMatch());
+		      h2_tofmult_vs_refmult->Fill(event->refMult(),event->nBTOFMatch());
 
 
 		      // GET CENTRALITY
+		      Int_t refMult = event->refMult();
+		      Float_t zdcX = event->ZDCx();
+	              mRefMultCorr->init(event->runId());
+      	     	      mRefMultCorr->initEvent(refMult, d_zvtx, zdcX);
+
 		      Int_t centrality = -99;
 
 		      // 3.0 GeV FXT  --  From Zachary Sweger Nov 11, 2020
@@ -231,7 +248,9 @@ Int_t TreeMaker::Make()
 		      // 19.6 GeV COL
 		      else if (configs.sqrt_s_NN == 19.6) // DON'T FORGET TO UPDATE N_track IN TreeAnalyzer.cxx!!
 			{
-			  if     ( primTracks >=   4 && primTracks <=   5 ) centrality =  0;  // 75% - 80% (Peripheral)
+		          const Int_t cent16 = mRefMultCorr->getCentralityBin16();
+			  centrality = cent16;
+			  /*if     ( primTracks >=   4 && primTracks <=   5 ) centrality =  0;  // 75% - 80% (Peripheral)
 			  else if( primTracks >=   6 && primTracks <=   8 ) centrality =  1;
 			  else if( primTracks >=   9 && primTracks <=  11 ) centrality =  2;
 			  else if( primTracks >=  12 && primTracks <=  16 ) centrality =  3;
@@ -246,13 +265,14 @@ Int_t TreeMaker::Make()
 			  else if( primTracks >= 150 && primTracks <= 186 ) centrality = 12;
 			  else if( primTracks >= 187 && primTracks <= 232 ) centrality = 13;
 			  else if( primTracks >= 233 && primTracks <= 290 ) centrality = 14;
-			  else if( primTracks >= 291 && primTracks <= 2048) centrality = 15;  // 0% - 5% (Central)
+			  else if( primTracks >= 291 && primTracks <= 2048) centrality = 15;  // 0% - 5% (Central)*/
 			}
 
 
 		      // Select only good centrality valued events
 		      if(centrality >= FIRST_CENT)
 			{
+  			  //h_eventCheck->Fill(5); // Count # of events before any cuts
 			  // Prepare New Tree parameters
 			  tree_Vx = d_xvtx;
 			  tree_Vy = d_yvtx;
@@ -333,7 +353,9 @@ Int_t TreeMaker::Make()
 			    } // 2nd track loop ends
 
 			  //tree_tracknumber = N_pr + N_pp + N_pm + N_kp + N_km + N_de + N_tr;
-			  tree_tracknumber = realTrackIndex + 1;
+			  //tree_tracknumber = realTrackIndex + 1; 
+			  tree_tracknumber = realTrackIndex ; // Erik update this
+			  // https://mail.google.com/mail/u/0/#search/erik/FMfcgzGpGwjBJVghvvPtNzslsgkHFZDw
 			  FxtTree->Fill();			    
 			} // Good centrality event selection ends
                     } // Vr cut ends

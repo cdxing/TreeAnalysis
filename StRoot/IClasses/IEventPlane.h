@@ -6,7 +6,8 @@
 #include "TVector3.h"
 #include "TMath.h"
 
-class IEventPlane : public TObject {
+//class IEventPlane : public TObject {
+class IEventPlane{
 
 	private:
 
@@ -33,7 +34,7 @@ class IEventPlane : public TObject {
 		IEventPlane();
 		IEventPlane(float, float);
 		
-		~IEventPlane(){} //This is needed apparently
+		virtual ~IEventPlane(); //This is needed apparently
 
 		void SetPhi(){mPhi = mMomentum.Phi();}
 		void SetPhi(float in_phi){mPhi = in_phi;}
@@ -85,7 +86,7 @@ class IEventPlane : public TObject {
 		Float_t QxTerm(int);
 		Float_t QyTerm(int);
 
-		ClassDef(IEventPlane,1)  // my EventPlane
+		//ClassDef(IEventPlane,1)  // my EventPlane
 };
     
 #endif

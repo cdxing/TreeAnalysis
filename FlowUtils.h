@@ -6,6 +6,7 @@
 #include "TH1.h"
 #include "TProfile.h"
 #include "TProfile2D.h"
+#include "TProfile3D.h"
 #include "TString.h"
 #include "TMath.h"
 
@@ -20,6 +21,7 @@ namespace FlowUtils
   {
     Double_t phi;
     Double_t eta;
+    Double_t mom;
     Double_t pT;
     Double_t KT;
     Double_t weight;
@@ -30,6 +32,7 @@ namespace FlowUtils
     Bool_t kpTag;
     Bool_t kmTag;
     Bool_t prTag;
+    Bool_t pbarTag;
     Bool_t deTag;
     Bool_t trTag;
 
@@ -42,6 +45,7 @@ namespace FlowUtils
     {
       phi = D_BAD_VALUE;
       eta = D_BAD_VALUE;
+      mom = D_BAD_VALUE;
       pT  = D_BAD_VALUE;
       KT  = D_BAD_VALUE;
       weight = 0;
@@ -52,6 +56,7 @@ namespace FlowUtils
       kpTag = false;
       kmTag = false;
       prTag = false;
+      pbarTag = false;
       deTag = false;
       trTag = false;
 
@@ -471,6 +476,58 @@ namespace FlowUtils
     setAllPeriods(eventInfo, order_m);
   }// End recenterQ()
 
+/*
+  void recenterQ1Epd(Event &eventInfo, TFile *correctionInputFile, Double_t order_m)
+  {
+    TH1D *h_XnTpc_INPUT  = (TH1D*)correctionInputFile->Get("h_XnTpc");
+    TH1D *h_XnTpcA_INPUT = (TH1D*)correctionInputFile->Get("h_XnTpcA");
+    TH1D *h_XnTpcB_INPUT = (TH1D*)correctionInputFile->Get("h_XnTpcB");
+    TH1D *h_XnEpd_INPUT  = (TH1D*)correctionInputFile->Get("h_XnEpd");
+    TH1D *h_XnEpdA_INPUT = (TH1D*)correctionInputFile->Get("h_XnEpdA");
+    TH1D *h_XnEpdB_INPUT = (TH1D*)correctionInputFile->Get("h_XnEpdB");
+
+    TH1D *h_YnTpc_INPUT  = (TH1D*)correctionInputFile->Get("h_YnTpc");
+    TH1D *h_YnTpcA_INPUT = (TH1D*)correctionInputFile->Get("h_YnTpcA");
+    TH1D *h_YnTpcB_INPUT = (TH1D*)correctionInputFile->Get("h_YnTpcB");
+    TH1D *h_YnEpd_INPUT  = (TH1D*)correctionInputFile->Get("h_YnEpd");
+    TH1D *h_YnEpdA_INPUT = (TH1D*)correctionInputFile->Get("h_YnEpdA");
+    TH1D *h_YnEpdB_INPUT = (TH1D*)correctionInputFile->Get("h_YnEpdB");
+
+    Double_t d_XnTpc_Avg  = h_XnTpc_INPUT->GetMean();
+    Double_t d_XnTpcA_Avg = h_XnTpcA_INPUT->GetMean();
+    Double_t d_XnTpcB_Avg = h_XnTpcB_INPUT->GetMean();
+    Double_t d_XnEpd_Avg  = h_XnEpd_INPUT->GetMean();
+    Double_t d_XnEpdA_Avg = h_XnEpdA_INPUT->GetMean();
+    Double_t d_XnEpdB_Avg = h_XnEpdB_INPUT->GetMean();
+
+    Double_t d_YnTpc_Avg  = h_YnTpc_INPUT->GetMean();
+    Double_t d_YnTpcA_Avg = h_YnTpcA_INPUT->GetMean();
+    Double_t d_YnTpcB_Avg = h_YnTpcB_INPUT->GetMean();
+    Double_t d_YnEpd_Avg  = h_YnEpd_INPUT->GetMean();
+    Double_t d_YnEpdA_Avg = h_YnEpdA_INPUT->GetMean();
+    Double_t d_YnEpdB_Avg = h_YnEpdB_INPUT->GetMean();
+
+
+    eventInfo.XnTpc  -= d_XnTpc_Avg;
+    eventInfo.XnTpcA -= d_XnTpcA_Avg;
+    eventInfo.XnTpcB -= d_XnTpcB_Avg;
+    eventInfo.XnEpd  -= d_XnEpd_Avg;
+    eventInfo.XnEpdA -= d_XnEpdA_Avg;
+    eventInfo.XnEpdB -= d_XnEpdB_Avg;
+
+    eventInfo.YnTpc  -= d_YnTpc_Avg;
+    eventInfo.YnTpcA -= d_YnTpcA_Avg;
+    eventInfo.YnTpcB -= d_YnTpcB_Avg;
+    eventInfo.YnEpd  -= d_YnEpd_Avg;
+    eventInfo.YnEpdA -= d_YnEpdA_Avg;
+    eventInfo.YnEpdB -= d_YnEpdB_Avg;
+
+    checkZeroQ(eventInfo);
+
+    getAllPsi(eventInfo, order_m);
+    setAllPeriods(eventInfo, order_m);
+  }// End recenterQ()
+*/
 
   ////////
   //   Performs the event-by-event shifting described in the Poskanzer paper to flatten the event 

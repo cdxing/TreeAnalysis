@@ -9,7 +9,7 @@
 //EPD geometry header file
 #include "../StEpdUtil/StEpdGeom.h"
 
-ClassImp(IEvent)
+//ClassImp(IEvent)
 
 //_________________
 IEvent::IEvent(){
@@ -256,6 +256,7 @@ std::vector<IEventPlane> IEvent::EPDVector(TVector3 primaryVertex, float etaCorr
 	}
 	
 	delete mEpdGeom;
+	mEpdGeom=NULL;
 	
 	return mEPParticlesCopy;
 }

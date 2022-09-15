@@ -5,13 +5,15 @@ class StChain;
 class StPicoDstMaker;
 class StPicoDst;
 class StPicoEvent;
+class StRefMultCorr;
 
 Int_t MakeTrees(Int_t nEvents, Int_t nFiles, TString InputFileList, TString OutputDir, TString JobIdName, std::string configFileName, Double_t testParameter)
 {
   // Load libraries
   gROOT->LoadMacro("$STAR/StRoot/StMuDSTMaker/COMMON/macros/loadSharedLibraries.C");
   loadSharedLibraries();
-    
+  
+  gSystem->Load("StRefMultCorr"); 
   gSystem->Load("StPicoEvent");
   gSystem->Load("StPicoDstMaker");
   gSystem->Load("StEpdUtil");

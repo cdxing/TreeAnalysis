@@ -27,6 +27,9 @@
 #include "StRoot/StPicoEvent/StPicoBTofHit.h"
 #include "StRoot/StPicoEvent/StPicoBTofPidTraits.h"
 #include "StRoot/StPicoEvent/StPicoTrackCovMatrix.h"
+#include "StRoot/StRefMultCorr/StRefMultCorr.h"
+#include "StRoot/StRefMultCorr/CentralityMaker.h"
+
 
 // Configuration file reader
 #include "../ConfigReader/ConfigReader.h"
@@ -40,6 +43,7 @@ class StPicoDstMaker;
 class StPicoDst;
 class StPicoEvent;
 class StPicoTrack;
+class StRefMultCorr;
 
 const Double_t PI = TMath::Pi();
 const Int_t Ncentralities =  16;
@@ -59,6 +63,7 @@ const Double_t D_M0_TR = 2.808921;   // Triton
 class TreeMaker : public StMaker
 {
 private:
+  static StRefMultCorr *mRefMultCorr;
   StPicoDstMaker* mPicoDstMaker;
   ConfigReader    configs;
   TString         JobIdName;
