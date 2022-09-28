@@ -499,6 +499,7 @@ int main(int argc, char *argv[])
   TH1D *h_mom_km = new TH1D("h_mom_km", "K^{-} Total Momentum;|p| (GeV);",   100, 0, 5);
   TH1D *h_mom_pr = new TH1D("h_mom_pr", "Proton Total Momentum;|p| (GeV);",  100, 0, 5);
   TH1D *h_mom_pbar = new TH1D("h_mom_pbar", "Anti-proton Total Momentum;|p| (GeV);",  100, 0, 5);
+  //TH1D *h_mom_neg = new TH1D("h_mom_neg", "Negative Particle Total Momentum;|p| (GeV);",  100, 0, 5);
   TH1D *h_mom_de = new TH1D("h_mom_de", "Deuteron Total Momentum;|p| (GeV);",100, 0, 5);
   TH1D *h_mom_tr = new TH1D("h_mom_tr", "Triton Total Momentum;|p| (GeV);",  100, 0, 5);
 
@@ -507,12 +508,14 @@ int main(int argc, char *argv[])
   TH1D *h_pT_kp = new TH1D("h_pT_kp","K^{+} p_{T}; p_{T} (GeV/c);Tracks",1000,0.0,5.0);
   TH1D *h_pT_km = new TH1D("h_pT_km","K^{-} p_{T}; p_{T} (GeV/c);Tracks",1000,0.0,5.0);
   TH1D *h_pT_pr = new TH1D("h_pT_pr","Proton p_{T};p_{T} (GeV/c);Tracks",1000,0.0,5.0);
-  TH1D *h_pT_pbar = new TH1D("h_pT_pbar","Anti-proton p_{T};p_{T} (GeV/c);Tracks",1000,0.0,5.0);
+  TH1D *h_pT_pbar = new TH1D("h_pT_pbar","Negative Particle p_{T};p_{T} (GeV/c);Tracks",1000,0.0,5.0);
+  //TH1D *h_pT_neg = new TH1D("h_pT_neg","Anti-proton p_{T};p_{T} (GeV/c);Tracks",1000,0.0,5.0);
   TH1D *h_pT_de = new TH1D("h_pT_de","Deuteron p_{T};p_{T} (GeV/c);Tracks",1000,0.0,5.0);
   TH1D *h_pT_tr = new TH1D("h_pT_tr","Triton p_{T};p_{T} (GeV/c);Tracks",1000,0.0,5.0);
 
   TH2D *h2_pT_vs_cent_pr = new TH2D("h2_pT_vs_cent_pr", "Proton;Centrality;p_{T} (GeV/c)", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 1000, 0.0, 5.0);
   TH2D *h2_pT_vs_cent_pbar = new TH2D("h2_pT_vs_cent_pbar", "Anti-proton;Centrality;p_{T} (GeV/c)", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 1000, 0.0, 5.0);
+  //TH2D *h2_pT_vs_cent_neg = new TH2D("h2_pT_vs_cent_neg", "Negative Particle;Centrality;p_{T} (GeV/c)", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 1000, 0.0, 5.0);
   TH2D *h2_pT_vs_cent_de = new TH2D("h2_pT_vs_cent_de", "Deuteron;Centrality;p_{T} (GeV/c)", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 1000, 0.0, 5.0);
   TH2D *h2_pT_vs_cent_tr = new TH2D("h2_pT_vs_cent_tr", "Triton;Centrality;p_{T} (GeV/c)", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 1000, 0.0, 5.0);
 
@@ -522,6 +525,7 @@ int main(int argc, char *argv[])
   TH1D *h_eta_km = new TH1D("h_eta_km","K^{-} #eta;#eta;Tracks",500,-5.0,5.0);
   TH1D *h_eta_pr = new TH1D("h_eta_pr","Proton #eta;#eta;Tracks",500,-5.0,5.0);
   TH1D *h_eta_pbar = new TH1D("h_eta_pbar","Anti-proton #eta;#eta;Tracks",500,-5.0,5.0);
+  //TH1D *h_eta_neg = new TH1D("h_eta_neg","Negative Particle #eta;#eta;Tracks",500,-5.0,5.0);
   TH1D *h_eta_de = new TH1D("h_eta_de","Deuteron #eta;#eta;Tracks",500,-5.0,5.0);
   TH1D *h_eta_tr = new TH1D("h_eta_tr","Triton #eta;#eta;Tracks",500,-5.0,5.0);
 
@@ -531,6 +535,7 @@ int main(int argc, char *argv[])
   TH1D *h_dndy_km = new TH1D("h_dndy_km", "K^{-} Raw Rapidity Spectrum;y;dN/dy",   80, -2, 2);
   TH1D *h_dndy_pr = new TH1D("h_dndy_pr", "Proton Raw Rapidity Spectrum;y;dN/dy",  80, -2, 2);
   TH1D *h_dndy_pbar = new TH1D("h_dndy_pbar", "Anti-proton Raw Rapidity Spectrum;y;dN/dy",  80, -2, 2);
+  //TH1D *h_dndy_neg = new TH1D("h_dndy_neg", "Negative Particle Raw Rapidity Spectrum;y;dN/dy",  80, -2, 2);
   TH1D *h_dndy_de = new TH1D("h_dndy_de", "Deuteron Raw Rapidity Spectrum;y;dN/dy",  80, -2, 2);
   TH1D *h_dndy_tr = new TH1D("h_dndy_tr", "Triton Raw Rapidity Spectrum;y;dN/dy",  80, -2, 2);
   
@@ -540,6 +545,7 @@ int main(int argc, char *argv[])
   TH1D *h_phi_km = new TH1D("h_phi_km","K^{-} #phi (Radian);#phi;Tracks",1000,-1.5*PI,1.5*PI);
   TH1D *h_phi_pr = new TH1D("h_phi_pr","Proton #phi (Radian);#phi;Tracks",1000,-1.5*PI,1.5*PI);
   TH1D *h_phi_pbar = new TH1D("h_phi_pbar","Anti-proton #phi (Radian);#phi;Tracks",1000,-1.5*PI,1.5*PI);
+  //TH1D *h_phi_neg = new TH1D("h_phi_neg","Negative Particle #phi (Radian);#phi;Tracks",1000,-1.5*PI,1.5*PI);
   TH1D *h_phi_de = new TH1D("h_phi_de","Deuteron #phi (Radian);#phi;Tracks",1000,-1.5*PI,1.5*PI);
   TH1D *h_phi_tr = new TH1D("h_phi_tr","Triton #phi (Radian);#phi;Tracks",1000,-1.5*PI,1.5*PI);
 
@@ -547,8 +553,9 @@ int main(int argc, char *argv[])
   TH1D *h_dndm_pm = new TH1D("h_dndm_pm", "#pi^{-} Raw m_{T} Spectrum;m_{T}-m_{0} (GeV);dN/dm_{T}", 60, 0, 3);
   TH1D *h_dndm_kp = new TH1D("h_dndm_kp", "K^{+} Raw m_{T} Spectrum;m_{T}-m_{0} (GeV);dN/dm_{T}",   60, 0, 3);
   TH1D *h_dndm_km = new TH1D("h_dndm_km", "K^{-} Raw m_{T} Spectrum;m_{T}-m_{0} (GeV);dN/dm_{T}",   60, 0, 3);
-  TH1D *h_dndm_pr = new TH1D("h_dndm_pr", "Anti-proton Raw m_{T} Spectrum;m_{T}-m_{0} (GeV);dN/dm_{T}",  60, 0, 3);
-  TH1D *h_dndm_pbar = new TH1D("h_dndm_pbar", "Proton Raw m_{T} Spectrum;m_{T}-m_{0} (GeV);dN/dm_{T}",  60, 0, 3);
+  TH1D *h_dndm_pr = new TH1D("h_dndm_pr", "Proton Raw m_{T} Spectrum;m_{T}-m_{0} (GeV);dN/dm_{T}",  60, 0, 3);
+  TH1D *h_dndm_pbar = new TH1D("h_dndm_pbar", "Anti-Proton Raw m_{T} Spectrum;m_{T}-m_{0} (GeV);dN/dm_{T}",  60, 0, 3);
+  //TH1D *h_dndm_neg = new TH1D("h_dndm_neg", "Negative Particle Raw m_{T} Spectrum;m_{T}-m_{0} (GeV);dN/dm_{T}",  60, 0, 3);
   TH1D *h_dndm_de = new TH1D("h_dndm_de", "Deuteron Raw m_{T} Spectrum;m_{T}-m_{0} (GeV);dN/dm_{T}",60, 0, 3);
   TH1D *h_dndm_tr = new TH1D("h_dndm_tr", "Triton Raw m_{T} Spectrum;m_{T}-m_{0} (GeV);dN/dm_{T}",  60, 0, 3);
   
@@ -558,6 +565,7 @@ int main(int argc, char *argv[])
   TH1D *h_mult_km = new TH1D("h_mult_km","K^{-} track multiplicity;K^{-} Mult;Events",1001,-0.5,1000.5);
   TH1D *h_mult_pr = new TH1D("h_mult_pr","Proton track multiplicity;Proton Mult;Events",1001,-0.5,1000.5);
   TH1D *h_mult_pbar = new TH1D("h_mult_pbar","Anti-proton track multiplicity;Proton Mult;Events",1001,-0.5,1000.5);
+  //TH1D *h_mult_neg = new TH1D("h_mult_neg","Negative Particle track multiplicity;Proton Mult;Events",1001,-0.5,1000.5);
   TH1D *h_mult_de = new TH1D("h_mult_de","Deuteron track multiplicity;Deuteron Mult;Events",1001,-0.5,1000.5);
   TH1D *h_mult_tr = new TH1D("h_mult_tr","Triton track multiplicity;Triton Mult;Events",1001,-0.5,1000.5);
   
@@ -567,6 +575,7 @@ int main(int argc, char *argv[])
   TH2D *h2_dEdx_vs_qp_km = new TH2D("h2_dEdx_vs_qp_km", "K^{-} dE/dx vs q|p|;q|p| (GeV);dE/dx (keV/cm)", 400, -2, 2, 500, 0, 10);
   TH2D *h2_dEdx_vs_qp_pr = new TH2D("h2_dEdx_vs_qp_pr", "Proton dE/dx vs q|p|;q|p| (GeV);dE/dx (keV/cm)", 400, -2, 2, 500, 0, 10);
   TH2D *h2_dEdx_vs_qp_pbar = new TH2D("h2_dEdx_vs_qp_pbar", "Anti-proton dE/dx vs q|p|;q|p| (GeV);dE/dx (keV/cm)", 400, -2, 2, 500, 0, 10);
+  //TH2D *h2_dEdx_vs_qp_neg = new TH2D("h2_dEdx_vs_qp_neg", "Negative Particle dE/dx vs q|p|;q|p| (GeV);dE/dx (keV/cm)", 400, -2, 2, 500, 0, 10);
   TH2D *h2_dEdx_vs_qp_de = new TH2D("h2_dEdx_vs_qp_de", "Deuteron dE/dx vs q|p|;q|p| (GeV);dE/dx (keV/cm)", 400, -2, 2, 500, 0, 10);
   TH2D *h2_dEdx_vs_qp_tr = new TH2D("h2_dEdx_vs_qp_tr", "Triton dE/dx vs q|p|;q|p| (GeV);dE/dx (keV/cm)", 400, -2, 2, 500, 0, 10);
   
@@ -640,6 +649,7 @@ int main(int argc, char *argv[])
   //TH2D *h2_pT_vs_yCM_pr_alt = new TH2D("h2_pT_vs_yCM_pr_alt", "Proton;y-y_{mid};p_{T} (GeV/c)",  tempBins1, tempLowBound1, tempHighBound1, tempBins2, tempLowBound2, tempHighBound2);
   TH2D *h2_pT_vs_yCM_de = new TH2D("h2_pT_vs_yCM_de", "Deuteron;y-y_{mid};p_{T} (GeV/c)",tempBins1, tempLowBound1, tempHighBound1, tempBins2, tempLowBound2, tempHighBound2);
   TH2D *h2_pT_vs_yCM_tr = new TH2D("h2_pT_vs_yCM_tr", "Triton;y-y_{mid};p_{T} (GeV/c)",  tempBins1, tempLowBound1, tempHighBound1, tempBins2, tempLowBound2, tempHighBound2);
+  TH2D *h2_pT_vs_eta_tpc = new TH2D("h2_pT_vs_eta_tpc", "TPC charged particle;#eta;p_{T} (GeV/c)",  tempBins1, tempLowBound1, tempHighBound1, tempBins2, tempLowBound2, tempHighBound2);
 
 
   TH1D *h_psiTpc_RAW  = new TH1D("h_psiTpc_RAW", "Raw Event Plane Angles (m = "+ORDER_M_STR+", TPC);#psi_{"+ORDER_M_STR+"};Events", 400, -PSI_BOUNDS, PSI_BOUNDS);
@@ -666,6 +676,7 @@ int main(int argc, char *argv[])
   TProfile *p_meanpT_vs_yCM_pr_alt = new TProfile("p_meanpT_vs_yCM_pr_alt","Proton <p_{T}>;y-y_{mid};<p_{T}>", 20, -1.0, 1.0);
   TProfile *p_meanpT_vs_yCM_pbar = new TProfile("p_meanpT_vs_yCM_pbar","Anti-proton <p_{T}>;y-y_{mid};<p_{T}>", 20, -1.0, 1.0);
   TProfile *p_meanpT_vs_yCM_pbar_alt = new TProfile("p_meanpT_vs_yCM_pbar_alt","Anti-proton <p_{T}>;y-y_{mid};<p_{T}>", 20, -1.0, 1.0);
+  //TProfile *p_meanpT_vs_yCM_neg = new TProfile("p_meanpT_vs_yCM_neg","Negative Particle <p_{T}>;y-y_{mid};<p_{T}>", 20, -1.0, 1.0);
   TProfile *p_meanpT_vs_yCM_de = new TProfile("p_meanpT_vs_yCM_de","Deuteron <p_{T}>;y-y_{mid};<p_{T}>", 20, -1.0, 1.0);
   TProfile *p_meanpT_vs_yCM_tr = new TProfile("p_meanpT_vs_yCM_tr","Triton <p_{T}>;y-y_{mid};<p_{T}>", 20, -1.0, 1.0);
 
@@ -697,6 +708,8 @@ int main(int argc, char *argv[])
 				   CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS);
   TProfile *p_vn_pbar_alt = new TProfile("p_vn_pbar_alt", "Anti-proton v_{"+ORDER_N_STR+"};Centrality;v_{"+ORDER_N_STR+"}{#psi_{"+ORDER_M_STR+"}}/R_{"+ORDER_N_STR+ORDER_M_STR+"}", 
 				       CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS);
+  //TProfile *p_vn_neg = new TProfile("p_vn_neg", "Anti-proton v_{"+ORDER_N_STR+"};Centrality;v_{"+ORDER_N_STR+"}{#psi_{"+ORDER_M_STR+"}}/R_{"+ORDER_N_STR+ORDER_M_STR+"}", 
+				   //CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS);
   TProfile *p_vn_de = new TProfile("p_vn_de", "Deuteron v_{"+ORDER_N_STR+"};Centrality;v_{"+ORDER_N_STR+"}{#psi_{"+ORDER_M_STR+"}}/R_{"+ORDER_N_STR+ORDER_M_STR+"}", 
 				   CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS);
   TProfile *p_vn_tr = new TProfile("p_vn_tr", "Triton v_{"+ORDER_N_STR+"};Centrality;v_{"+ORDER_N_STR+"}{#psi_{"+ORDER_M_STR+"}}/R_{"+ORDER_N_STR+ORDER_M_STR+"}", 
@@ -782,6 +795,11 @@ int main(int argc, char *argv[])
   TProfile2D *p2_vn_yCM_cent_pr = new TProfile2D("p2_vn_yCM_cent_pr", "Proton v_{"+ORDER_N_STR+"};Centrality;y-y_{mid}", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 40, -2, 2);
   TProfile2D *p2_vn_yCM_cent_pr_alt = 
     new TProfile2D("p2_vn_yCM_cent_pr_alt", "Proton v_{"+ORDER_N_STR+"};Centrality;y-y_{mid}", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 20, -1, 1);
+  TProfile2D *p2_vn_yCM_cent_pr_symmetry_ptScan[4]; // pT scan - pT: [0.8, 0.9, 1.0, 1.1, 1.2];
+    for (int iPt=0; iPt<4; iPt++){
+    	p2_vn_yCM_cent_pr_symmetry_ptScan[iPt] = 
+    		new TProfile2D(Form("p2_vn_yCM_cent_pr_symmetry_ptScan_%d", iPt), "Proton v_{"+ORDER_N_STR+"};Centrality;y-y_{mid}", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 40, -2, 2);
+    }
   TProfile2D *p2_vn_yCM_cent_pr_symmetry = 
     new TProfile2D("p2_vn_yCM_cent_pr_symmetry", "Proton v_{"+ORDER_N_STR+"};Centrality;y-y_{mid}", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 40, -2, 2);
   TProfile2D *p2_vn_yCM_cent_pbar = new TProfile2D("p2_vn_yCM_cent_pbar", "Anti-proton v_{"+ORDER_N_STR+"};Centrality;y-y_{mid}", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 40, -2, 2);
@@ -789,6 +807,12 @@ int main(int argc, char *argv[])
     new TProfile2D("p2_vn_yCM_cent_pbar_alt", "Anti-proton v_{"+ORDER_N_STR+"};Centrality;y-y_{mid}", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 20, -1, 1);
   TProfile2D *p2_vn_yCM_cent_pbar_symmetry = 
     new TProfile2D("p2_vn_yCM_cent_pbar_symmetry", "Anti-proton v_{"+ORDER_N_STR+"};Centrality;y-y_{mid}", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 40, -2, 2);
+  //TProfile2D *p2_vn_yCM_cent_neg = new TProfile2D("p2_vn_yCM_cent_neg", "Negative Particle v_{"+ORDER_N_STR+"};Centrality;y-y_{mid}", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 40, -2, 2);
+  //TProfile2D *p2_vn_yCM_cent_neg_symmetry = 
+    //new TProfile2D("p2_vn_yCM_cent_neg_symmetry", "Negative Particle v_{"+ORDER_N_STR+"};Centrality;y-y_{mid}", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 40, -2, 2);
+  TProfile2D *p2_vn_eta_cent_tpc = new TProfile2D("p2_vn_eta_cent_tpc", "TPC Charged Particle v_{"+ORDER_N_STR+"};Centrality;#eta", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 40, -2, 2);
+  TProfile2D *p2_vn_eta_cent_tpc_symmetry = 
+    new TProfile2D("p2_vn_eta_cent_tpc_symmetry", "TPC Charged Particle v_{"+ORDER_N_STR+"};Centrality;#eta", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 40, -2, 2);
   TProfile2D *p2_vn_yCM_cent_de = new TProfile2D("p2_vn_yCM_cent_de", "Deuteron v_{"+ORDER_N_STR+"};Centrality;y-y_{mid}", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 20, -1, 1);
   TProfile2D *p2_vn_yCM_cent_tr = new TProfile2D("p2_vn_yCM_cent_tr", "Triton v_{"+ORDER_N_STR+"};Centrality;y-y_{mid}", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 20, -1, 1);
   
@@ -1496,10 +1520,12 @@ int main(int argc, char *argv[])
 	      if (triton && proton)   { proton = false; }
 
 
+	      //if (pion && proton)   { pion = false; }
 	      if (pion && proton)   { proton = false; }
 	      //if (pion && deuteron) { deuteron = false; }
 	      //if (pion && triton)   { triton = false; }
 	      
+	      //if (kaon && proton)   { kaon = false; }
 	      if (kaon && proton)   { proton = false; }
 	      //if (kaon && deuteron) { deuteron = false; }
 	      //if (kaon && triton)   { triton = false; }
@@ -1508,6 +1534,13 @@ int main(int argc, char *argv[])
 	      //if (triton && proton) { proton = false; }
 	      //=========================================================
 	      //          END PID Cuts
+	      //=========================================================
+	      
+	      //=========================================================
+	      //          All Charged Partcle Flow 
+	      //=========================================================
+	      //=========================================================
+	      //         End All Charged Partcle Flow 
 	      //=========================================================
 
 	      if (pion || kaon || proton || deuteron || triton) h_trackCheck->Fill(2);
@@ -1525,6 +1558,7 @@ int main(int argc, char *argv[])
 
 	      if(pion) // PID Pions
 		{ 
+			//std::cout<< "is pion ! " << std::endl;
 		  d_rapidity = FlowUtils::rapidity(d_px, d_py, d_pz, D_M0_PI);
 		  d_mT = FlowUtils::transMass(d_px, d_py, D_M0_PI);
 
@@ -2285,6 +2319,7 @@ int main(int argc, char *argv[])
 	    {
 	      jthPhi = eventInfo.tpcParticles.at(j).phi;
 	      jthMom = eventInfo.tpcParticles.at(j).mom;
+	      jthEta = eventInfo.tpcParticles.at(j).eta;
 	      jthpT  = eventInfo.tpcParticles.at(j).pT;
 	      jthKT  = eventInfo.tpcParticles.at(j).KT;
 	      jthRapidity = eventInfo.tpcParticles.at(j).rapidity;
@@ -2400,7 +2435,23 @@ int main(int argc, char *argv[])
 		  jthPhi = eventInfo.tpcParticles.at(j).phi;
 		  jthpT  = eventInfo.tpcParticles.at(j).pT;
 		  jthKT  = eventInfo.tpcParticles.at(j).KT;
+		  jthEta = eventInfo.tpcParticles.at(j).eta;
 		  jthRapidity = eventInfo.tpcParticles.at(j).rapidity;
+		  if (jthPhi == FlowUtils::D_BAD_VALUE || jthpT == FlowUtils::D_BAD_VALUE) 
+		    continue;
+		  // ALL CHARGED TRACKS
+		  h2_pT_vs_eta_tpc->Fill(jthEta, jthpT);
+		      // RAPIDITY DEPENDENT PLOT
+		  if (jthEta > -2.0 && jthEta < 2.0 && 
+		      //jthMom < 2.8 && // add the momemtum cut as Zuowen did
+			  jthpT > 0.4 && jthpT < 1.2 )
+		    { p2_vn_eta_cent_tpc->Fill(centID, jthEta, TMath::Cos(ORDER_N * (jthPhi - psi)) / (resolution)); }
+		      // RAPIDITY SYMMETRIC ACCEPTANCE REGION
+		  if (jthEta > -2.0 && jthEta < 2.0 && 
+		      //jthMom < 2.8 && // add the momemtum cut as Zuowen did
+			  jthpT > 0.8 && jthpT < 1.2 )
+		    { p2_vn_eta_cent_tpc_symmetry->Fill(centID, jthEta, TMath::Cos(ORDER_N * (jthPhi - psi)) / (resolution)); }
+
 		  if (jthPhi == FlowUtils::D_BAD_VALUE || jthpT == FlowUtils::D_BAD_VALUE || 
 		      jthKT == FlowUtils::D_BAD_VALUE  || jthRapidity == FlowUtils::D_BAD_VALUE) 
 		    continue;
@@ -2434,6 +2485,8 @@ int main(int argc, char *argv[])
 		      jthpT >= configs.pt_norm_pi_low && jthpT <= configs.pt_norm_pi_high &&
 		      jthRapidity - Y_MID > configs.yCM_norm_pi_low && jthRapidity - Y_MID < configs.yCM_norm_pi_high)
 		    {
+
+			//std::cout<< "Fill pion ! " << std::endl;
 		      p2_vn_yCM_cent_pp->Fill(centID, jthRapidity - Y_MID, TMath::Cos(ORDER_N * (jthPhi - psi)) / (resolution * tpcEfficiency));
 		      p_vn_pp->Fill(centID, TMath::Cos(ORDER_N * (jthPhi - psi)) / (resolution * tpcEfficiency)); 
 		      p2_vn_pT_cent_pp->Fill(centID, jthpT, TMath::Cos(ORDER_N * (jthPhi - psi)) / (resolution * tpcEfficiency));
@@ -2561,7 +2614,15 @@ int main(int argc, char *argv[])
 		      // RAPIDITY SYMMETRIC ACCEPTANCE REGION
 		      if (jthRapidity - Y_MID > configs.yCM_ySym_pr_low && jthRapidity - Y_MID < configs.yCM_ySym_pr_high && 
 			  jthpT > configs.pt_ySym_pr_low && jthpT < configs.pt_ySym_pr_high)
-			{ p2_vn_yCM_cent_pr_symmetry->Fill(centID, jthRapidity - Y_MID, TMath::Cos(ORDER_N * (jthPhi - psi)) / (resolution * tpcEfficiency)); }
+			{ 
+				p2_vn_yCM_cent_pr_symmetry->Fill(centID, jthRapidity - Y_MID, TMath::Cos(ORDER_N * (jthPhi - psi)) / (resolution * tpcEfficiency));
+				int iPt = -999;
+				if(jthpT > 0.8 && jthpT < 0.9) iPt = 0;
+				else if(jthpT > 0.9 && jthpT < 1.0) iPt = 1;
+				else if(jthpT > 1.0 && jthpT < 1.1) iPt = 2;
+				else if(jthpT > 1.1 && jthpT < 1.2) iPt = 3;
+				if(iPt != -999) p2_vn_yCM_cent_pr_symmetry_ptScan[iPt]->Fill(centID, jthRapidity - Y_MID, TMath::Cos(ORDER_N * (jthPhi - psi)) / (resolution * tpcEfficiency));
+			}
 
 		      // ONLY FORWARD ACCEPTANCE REGION
 		      if (jthRapidity - Y_MID > configs.yCM_yFor_pr_low && jthRapidity - Y_MID < configs.yCM_yFor_pr_high && 

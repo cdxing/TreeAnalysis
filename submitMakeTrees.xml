@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<job maxFilesPerProcess="20" filesPerHour="1" fileListSyntax="xrootd" simulateSubmission="false">
+  
+  <command>
+    starver SL21c
+    ln -s /star/u/dchen/ana/19gev_2019/v0_flow/TreeAnalysis/StRoot .
+    ln -s /star/u/dchen/ana/19gev_2019/v0_flow/TreeAnalysis/MakeTrees.C .
+    ln -s /star/u/dchen/ana/19gev_2019/v0_flow/TreeAnalysis/config_19p6GeV.txt .
+
+    cons
+    root4star -q -b -l MakeTrees.C\(0,$INPUTFILECOUNT,\"$FILELIST\",\"$SCRATCH\",\"$JOBID\",\"config_19p6GeV.txt\",0\) &gt;&amp; ${JOBID}.log 
+    tar -zcvf ${JOBID}.log.tgz ${JOBID}.log
+  </command>
+  
+  <SandBox installer="ZIP">
+    <Package>
+      <File>file:./MakeTrees.C</File>
+      <File>file:./config_19p6GeV.txt</File>
+      <File>file:./StRoot</File>
+    </Package>
+  </SandBox>
+
+  <!-- Get input files from get_file_lis.pl -->
+	  <!--input URL="catalog:star.bnl.gov?production=P21ic,filetype=daq_reco_picoDst,trgsetupname=production_19GeV_2019,tpx=1,filename~st_physics,runnumber=&run;,sanity=1,storage!=HPSS" nFiles="all"/-->
+	  <input URL="catalog:star.bnl.gov?production=P21ic,filetype=daq_reco_picoDst,trgsetupname=production_19GeV_2019,tpx=1,filename~st_physics,sanity=1,storage!=HPSS" nFiles="103690"/>
+	 <Generator>
+	     <Location>./report/</Location>
+	     <ScriptLocation>./csh/</ScriptLocation>
+	     <ListLocation>./list/</ListLocation>
+         </Generator>
+	 
+	 <!--stdout URL="file:/star/data01/pwg/dchen/Ana/19p6GeV/minitree/ywTreeBack/&run;/out/sched$JOBID.out"/-->
+	 <!--stderr URL="file:/star/data01/pwg/dchen/Ana/19p6GeV/minitree/ywTreeBack/&run;/out/sched$JOBID.err"/-->
+        <!--output fromScratch="*.root" toURL="file:/star/data05/scratch/ywu27/Fxt/results/" /-->
+	<!--output fromScratch="$JOBID.root" toURL="file:/star/data01/pwg/dchen/Ana/19p6GeV/minitree/ywTreeBack/&run;/production/" /-->
+
+	 <stdout discard="true" />
+	 <stderr URL="file:./err/$JOBID.err"/>
+        <!--output fromScratch="*.root" toURL="file:/star/data05/scratch/ywu27/Fxt/results/" /-->
+	<!--output fromScratch="$JOBID.root" toURL="file:/star/data01/pwg/dchen/Ana/19p6GeV/minitree/ywTreeBack/&run;/production/" /-->
+        <output fromScratch="*.root" toURL="file:/star/data05/scratch/dchen/Ana/19p6GeV/maketrees/production/" />
+        <output fromScratch="*.log.tgz" toURL="file:/star/data05/scratch/dchen/Ana/19p6GeV/maketrees/log/" />
+
+
+</job>

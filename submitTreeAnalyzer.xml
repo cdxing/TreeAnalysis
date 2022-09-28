@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<job maxFilesPerProcess="20" filesPerHour="1" fileListSyntax="xrootd" simulateSubmission="false">
+  
+  <command>
+    starver SL21c
+    ln -s /star/u/dchen/ana/19gev_2019/v0_flow/TreeAnalysis/StRoot .
+    ln -s /star/u/dchen/ana/19gev_2019/v0_flow/TreeAnalysis/FlowUtils.h .
+    ln -s /star/u/dchen/ana/19gev_2019/v0_flow/TreeAnalysis/makefile .
+    ln -s /star/u/dchen/ana/19gev_2019/v0_flow/TreeAnalysis/TreeAnalyzer .
+    ln -s /star/u/dchen/ana/19gev_2019/v0_flow/TreeAnalysis/libs .
+    ln -s /star/u/dchen/ana/19gev_2019/v0_flow/TreeAnalysis/correctionInfo_INPUT.root .
+    ln -s /star/u/dchen/ana/19gev_2019/v0_flow/TreeAnalysis/resolutionInfo_INPUT.root .
+
+    <!--make-->
+    TreeAnalyzer $INPUTFILE0 $JOBID config_19p6GeV.txt correctionInfo_INPUT.root resolutionInfo_INPUT.root &gt;&amp; ${JOBID}.log 
+    tar -zcvf ${JOBID}.log.tgz ${JOBID}.log
+  </command>
+  
+  <SandBox installer="ZIP">
+    <Package>
+      <File>file:./TreeAnalyzer</File>
+      <File>file:./makefile</File>
+      <File>file:./correctionInfo_INPUT.root</File>
+      <File>file:./resolutionInfo_INPUT.root</File>
+      <File>file:./config_19p6GeV.txt</File>
+      <File>file:./FlowUtils.h</File>
+      <File>file:./StRoot</File>
+    </Package>
+  </SandBox>
+
+  <!-- Get input files from get_file_lis.pl -->
+  <!--input URL="catalog:star.bnl.gov?production=P21ic,filetype=daq_reco_picoDst,trgsetupname=production_19GeV_2019,tpx=1,filename~st_physics,runnumber=&run;,sanity=1,storage!=HPSS" nFiles="all"/-->
+  <input URL="filelist:/star/u/dchen/ana/19gev_2019/v0_flow/TreeAnalysis/treelist.list" nFiles="all"/>
+	  <!--input URL="catalog:star.bnl.gov?production=P21ic,filetype=daq_reco_picoDst,trgsetupname=production_19GeV_2019,tpx=1,filename~st_physics,sanity=1,storage!=HPSS" nFiles="10369"/-->
+	 <Generator>
+	     <Location>./report/</Location>
+	     <ScriptLocation>./csh/</ScriptLocation>
+	     <ListLocation>./list/</ListLocation>
+         </Generator>
+	 
+	 <!--stdout URL="file:/star/data01/pwg/dchen/Ana/19p6GeV/minitree/ywTreeBack/&run;/out/sched$JOBID.out"/-->
+	 <!--stderr URL="file:/star/data01/pwg/dchen/Ana/19p6GeV/minitree/ywTreeBack/&run;/out/sched$JOBID.err"/-->
+        <!--output fromScratch="*.root" toURL="file:/star/data05/scratch/ywu27/Fxt/results/" /-->
+	<!--output fromScratch="$JOBID.root" toURL="file:/star/data01/pwg/dchen/Ana/19p6GeV/minitree/ywTreeBack/&run;/production/" /-->
+
+	 <stdout discard="true" />
+	 <stderr URL="file:./err/$JOBID.err"/>
+        <!--output fromScratch="*.root" toURL="file:/star/data05/scratch/ywu27/Fxt/results/" /-->
+	<!--output fromScratch="$JOBID.root" toURL="file:/star/data01/pwg/dchen/Ana/19p6GeV/minitree/ywTreeBack/&run;/production/" /-->
+        <output fromScratch="*.root" toURL="file:/star/data01/pwg/dchen/Ana/19p6GeV/treeanalyzer/production/" />
+        <output fromScratch="*.log.tgz" toURL="file:/star/data01/pwg/dchen/Ana/19p6GeV/treeanalyzer/log/" />
+
+
+</job>
