@@ -1,6 +1,8 @@
-void prelimPtPlots()
+void prelimPtPlots(TString jobID)
 {
-  TString fileName = "Normal.picoDst.result.combined.root";
+  if (!jobID) { std::cout << "Supply a job ID!" << std::endl; return; }
+  TString fileName = jobID + ".picoDst.result.combined.root";
+
   TFile *file = TFile::Open(fileName);
   if(!file) {std::cout << "Wrong file!" << std::endl; return;}
 
@@ -17,6 +19,7 @@ void prelimPtPlots()
   gStyle->SetOptStat(0);
   gStyle->SetEndErrorSize(6);
   gStyle->SetLineWidth(3);
+  gStyle->SetOptDate();
 
   TProfile2D *p2_vn_pT_cent_pr = (TProfile2D*)file->Get("p2_vn_pT_cent_pr");
   TProfile *p_vn_pT_00to10_pr = p2_vn_pT_cent_pr->ProfileY("p_vn_pT_00to10_pr", 15, 16);
@@ -66,7 +69,7 @@ void prelimPtPlots()
   sys_pT_40to60_pr->SetLineColor(kGreen+1);
   ////
   
-  THStack *prPtStack   = new THStack("prPtStack", ";p_{T} (GeV/c);v_{3} {#psi_{1}}");
+  THStack *prPtStack   = new THStack("prPtStack", ";p_{T} (GeV/c);v_{3} {#Psi_{1}}");
   prPtStack->Add(h_vn_pT_00to10_pr);
   prPtStack->Add(h_vn_pT_10to40_pr);
   prPtStack->Add(h_vn_pT_40to60_pr);
@@ -86,7 +89,7 @@ void prelimPtPlots()
   prText->SetTextAlign(12);
   prText->AddText("Au+Au #sqrt{s_{NN}} = 3.0 GeV FXT (year 2018)");
   prText->AddText("Proton");
-  prText->AddText("0 < y_{CM} < 0.5 GeV");
+  prText->AddText("0 < y_{CM} < 0.5");
   prText->SetFillColorAlpha(0,0);
   prText->SetLineColorAlpha(0,0);
   prText->SetTextSize(0.045);
@@ -112,7 +115,7 @@ void prelimPtPlots()
   prPtStack->GetYaxis()->SetTitleSize(0.05);
   prPtStack->Draw();
   prPtStack->SetMaximum(0.06);
-  prPtStack->SetMinimum(-0.09);
+  prPtStack->SetMinimum(-0.12);
   prPtStack->Draw("NOSTACK E1P");
   zeroLine_pt->Draw("SAME");
   prPtStack->Draw("NOSTACK E1P SAME");
@@ -121,8 +124,8 @@ void prelimPtPlots()
   sys_pT_40to60_pr->Draw("[]");
   prLegend->Draw();
   prText->Draw();
-  prelimText->Draw();
-  canvas->SaveAs("v3_prPtStack.png");
+  //prelimText->Draw();
+  canvas->SaveAs("v3_prPtStack.pdf");
   canvas->Clear();
   
   systematicFile->Close();
