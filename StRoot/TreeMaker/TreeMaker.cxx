@@ -140,13 +140,14 @@ Int_t TreeMaker::Make()
 	      Double_t d_xvtx = pVtx.x();
 	      Double_t d_yvtx = pVtx.y();
 	      Double_t d_zvtx = pVtx.z();
-	      Double_t d_rvtx = TMath::Sqrt(d_xvtx * d_xvtx + (d_yvtx + 2) * (d_yvtx + 2));
+	      //Double_t d_rvtx = TMath::Sqrt(d_xvtx * d_xvtx + (d_yvtx + 2) * (d_yvtx + 2));
+	      Double_t d_rvtx = TMath::Sqrt(d_xvtx * d_xvtx + (d_yvtx) * (d_yvtx)); // COL
 	  
-	      //h_zvtx->Fill(pVtx.Z());
-	      //h2_trans_vtx->Fill(pVtx.X(),pVtx.Y());
+	      h_zvtx->Fill(pVtx.Z());
 
 	      if(d_zvtx > configs.m_z_vtx_low && d_zvtx < configs.m_z_vtx_high) // Vz cut
 		{ 
+	      	  h2_trans_vtx->Fill(pVtx.X(),pVtx.Y());
 	      	  //h_eventCheck->Fill(3); // Count # of events after z-vertex cut
 		  if(d_rvtx < configs.m_r_vtx) // Vr cut
 		    { 

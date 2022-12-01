@@ -483,11 +483,20 @@ int main(int argc, char *argv[])
   TH1D *h_eta = new TH1D("h_eta","#eta;#eta;Tracks",600,-6.0,6.0);
   TH1D *h_phi = new TH1D("h_phi","#phi (Radian);#phi;Tracks",1000,-1.5*PI,1.5*PI);
   TH2D *h2_dEdx_vs_qp = new TH2D("h2_dEdx_vs_qp", "dE/dx vs q|p|;q|p| (GeV);dE/dx (keV/cm)", 800, -2, 6, 1000, 0, 20);
+  TH3D *h3_dEdx_vs_qp = new TH3D("h3_dEdx_vs_qp", "dE/dx vs y vs q|p|;y;q|p| (GeV);dE/dx (keV/cm)", 40, -2., 2., 800, -2, 6, 1000, 0, 20);
   TH2D *h2_dEdx_vs_qpt = new TH2D("h2_dEdx_vs_qpt", "dE/dx vs q|pT|;q|pT| (GeV);dE/dx (keV/cm)", 800, -2, 6, 1000, 0, 20);
-  TH2D *h2_dEdx_vs_qp_charge2 = new TH2D("h2_dEdx_vs_qp_charge2", "dE/dx vs q|p|;q|p| (GeV);dE/dx (keV/cm)", 800, -2, 6, 1000, 0, 20);
+  TH3D *h3_dEdx_vs_qpt = new TH3D("h3_dEdx_vs_qpt", "dE/dx vs y vs q|pT|;y;q|pT| (GeV);dE/dx (keV/cm)", 40, -2., 2., 800, -2, 6, 1000, 0, 20);
+  TH2D *h2_dEdx_vs_qp_charge2 = new TH2D("h2_dEdx_vs_qp_charge2", "dE/dx vs q|p|;q|p| (GeV);dE/dx (keV/cm)" , 800, -2, 6, 1000, 0, 20);
   TH2D *h2_dEdx_vs_qp_half = new TH2D("h2_dEdx_vs_qp_half", "dE/dx vs q|p|;q|p| (GeV);dE/dx (keV/cm)", 600, 0, 6, 1000, 0, 20);
   TH2D *h2_beta_vs_qp = new TH2D("h2_beta_vs_qp","1/#beta vs Momentum;q*|p| (GeV);1/#beta", 300, -3, 3, 300, 0.5, 3.5);
   TH2D *h2_m2_vs_qp = new TH2D("h2_m2_vs_qp", "m^2 vs q*|p|;q*|p| (GeV);m^2 (GeV^2)", 400, -4, 4, 400, -0.1, 1.5);
+  TH2D *h2_vs_nSigmaPr_vs_p = new TH2D("h2_vs_nSigmaPr_p", "nSigmaProton vs p;|p| (GeV);nSigmaProton", 50, 0, 5, 200, -10,10);
+  TH2D *h2_vs_nSigmaKa_vs_p = new TH2D("h2_vs_nSigmaKa_p", "nSigmaKaon   vs p;|p| (GeV);nSigmaKaon  ", 50, 0, 5, 200, -10,10);
+  TH2D *h2_vs_nSigmaPi_vs_p = new TH2D("h2_vs_nSigmaPi_p", "nSigmaPion   vs p;|p| (GeV);nSigmaPioc  ", 50, 0, 5, 200, -10,10);
+  TH2D *h2_vs_nSigmaPr_vs_pt = new TH2D("h2_p_vs_nSigmaPr_pt", "nSigmaProton vs pT;|pT| (GeV);nSigmaProton", 50, 0, 5, 200, -10,10);
+  TH2D *h2_vs_nSigmaKa_vs_pt = new TH2D("h2_p_vs_nSigmaKa_pt", "nSigmaKaon   vs pT;|pT| (GeV);nSigmaKaon  ", 50, 0, 5, 200, -10,10);
+  TH2D *h2_vs_nSigmaPi_vs_pt = new TH2D("h2_p_vs_nSigmaPi_pt", "nSigmaPion   vs pT;|pT| (GeV);nSigmaPioc  ", 50, 0, 5, 200, -10,10);
+  TH3D *h3_vs_nSigmaPr_vs_y_vs_pt = new TH3D("h3_p_vs_nSigmaPr_pt", "nSigmaProton vs y vs pT;y;|pT| (GeV);nSigmaProton",40, -2, 2, 50, 0, 5, 200, -10, 10);
 
   TH1D *h_tofBeta = new TH1D("h_tofBeta", "TOF #beta;#beta;Tracks", 150, 0, 1.5);
   TH1D *h_m2 = new TH1D("h_m2", "m^{2};m^{2} (GeV^{2}/c^{4});Tracks", 1000, 0, 15);
@@ -668,17 +677,17 @@ int main(int argc, char *argv[])
   TH1D *h_psiEpdA_RAW = new TH1D("h_psiEpdA_RAW", "Raw Event Plane Angles (m = "+ORDER_M_STR+", EPD A);#psi_{"+ORDER_M_STR+"};Events", 400, -PSI_BOUNDS, PSI_BOUNDS);
   TH1D *h_psiEpdB_RAW = new TH1D("h_psiEpdB_RAW", "Raw Event Plane Angles (m = "+ORDER_M_STR+", EPD B);#psi_{"+ORDER_M_STR+"};Events", 400, -PSI_BOUNDS, PSI_BOUNDS);
 
-  TProfile *p_meanpT_vs_yCM_pp = new TProfile("p_meanpT_vs_yCM_pp","#pi^{+} <p_{T}>;y-y_{mid};<p_{T}>", 20, -1.0, 1.0);
-  TProfile *p_meanpT_vs_yCM_pm = new TProfile("p_meanpT_vs_yCM_pm","#pi^{-} <p_{T}>;y-y_{mid};<p_{T}>", 20, -1.0, 1.0);
-  TProfile *p_meanpT_vs_yCM_kp = new TProfile("p_meanpT_vs_yCM_kp","K^{+} <p_{T}>;y-y_{mid};<p_{T}>", 20, -1.0, 1.0);
-  TProfile *p_meanpT_vs_yCM_km = new TProfile("p_meanpT_vs_yCM_km","K^{-} <p_{T}>;y-y_{mid};<p_{T}>", 20, -1.0, 1.0);
-  TProfile *p_meanpT_vs_yCM_pr = new TProfile("p_meanpT_vs_yCM_pr","Proton <p_{T}>;y-y_{mid};<p_{T}>", 20, -1.0, 1.0);
-  TProfile *p_meanpT_vs_yCM_pr_alt = new TProfile("p_meanpT_vs_yCM_pr_alt","Proton <p_{T}>;y-y_{mid};<p_{T}>", 20, -1.0, 1.0);
-  TProfile *p_meanpT_vs_yCM_pbar = new TProfile("p_meanpT_vs_yCM_pbar","Anti-proton <p_{T}>;y-y_{mid};<p_{T}>", 20, -1.0, 1.0);
-  TProfile *p_meanpT_vs_yCM_pbar_alt = new TProfile("p_meanpT_vs_yCM_pbar_alt","Anti-proton <p_{T}>;y-y_{mid};<p_{T}>", 20, -1.0, 1.0);
-  //TProfile *p_meanpT_vs_yCM_neg = new TProfile("p_meanpT_vs_yCM_neg","Negative Particle <p_{T}>;y-y_{mid};<p_{T}>", 20, -1.0, 1.0);
-  TProfile *p_meanpT_vs_yCM_de = new TProfile("p_meanpT_vs_yCM_de","Deuteron <p_{T}>;y-y_{mid};<p_{T}>", 20, -1.0, 1.0);
-  TProfile *p_meanpT_vs_yCM_tr = new TProfile("p_meanpT_vs_yCM_tr","Triton <p_{T}>;y-y_{mid};<p_{T}>", 20, -1.0, 1.0);
+  TProfile *p_meanpT_vs_yCM_pp = new TProfile("p_meanpT_vs_yCM_pp","#pi^{+} <p_{T}>;y-y_{mid};<p_{T}>", 40, -2.0, 2.0);
+  TProfile *p_meanpT_vs_yCM_pm = new TProfile("p_meanpT_vs_yCM_pm","#pi^{-} <p_{T}>;y-y_{mid};<p_{T}>", 40, -2.0, 2.0);
+  TProfile *p_meanpT_vs_yCM_kp = new TProfile("p_meanpT_vs_yCM_kp","K^{+} <p_{T}>;y-y_{mid};<p_{T}>", 40, -2.0, 2.0);
+  TProfile *p_meanpT_vs_yCM_km = new TProfile("p_meanpT_vs_yCM_km","K^{-} <p_{T}>;y-y_{mid};<p_{T}>", 40, -2.0, 2.0);
+  TProfile *p_meanpT_vs_yCM_pr = new TProfile("p_meanpT_vs_yCM_pr","Proton <p_{T}>;y-y_{mid};<p_{T}>", 40, -2.0, 2.0);
+  TProfile *p_meanpT_vs_yCM_pr_alt = new TProfile("p_meanpT_vs_yCM_pr_alt","Proton <p_{T}>;y-y_{mid};<p_{T}>", 40, -2.0, 2.0);
+  TProfile *p_meanpT_vs_yCM_pbar = new TProfile("p_meanpT_vs_yCM_pbar","Anti-proton <p_{T}>;y-y_{mid};<p_{T}>", 40, -2.0, 2.0);
+  TProfile *p_meanpT_vs_yCM_pbar_alt = new TProfile("p_meanpT_vs_yCM_pbar_alt","Anti-proton <p_{T}>;y-y_{mid};<p_{T}>", 40, -2.0, 2.0);
+  //TProfile *p_meanpT_vs_yCM_neg = new TProfile("p_meanpT_vs_yCM_neg","Negative Particle <p_{T}>;y-y_{mid};<p_{T}>", 40, -2.0, 2.0);
+  TProfile *p_meanpT_vs_yCM_de = new TProfile("p_meanpT_vs_yCM_de","Deuteron <p_{T}>;y-y_{mid};<p_{T}>", 40, -2.0, 2.0);
+  TProfile *p_meanpT_vs_yCM_tr = new TProfile("p_meanpT_vs_yCM_tr","Triton <p_{T}>;y-y_{mid};<p_{T}>", 40, -2.0, 2.0);
 
   //TProfile *p_vn_EpdA = new TProfile("p_vn_EpdA", "v_{"+ORDER_N_STR+"} (EPD A);Centrality;v_{"+ORDER_N_STR+"}{#psi_{"+ORDER_M_STR+"}}/R_{"+ORDER_N_STR+ORDER_M_STR+"}", 
   //				    CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS);
@@ -813,8 +822,8 @@ int main(int argc, char *argv[])
   TProfile2D *p2_vn_eta_cent_tpc = new TProfile2D("p2_vn_eta_cent_tpc", "TPC Charged Particle v_{"+ORDER_N_STR+"};Centrality;#eta", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 40, -2, 2);
   TProfile2D *p2_vn_eta_cent_tpc_symmetry = 
     new TProfile2D("p2_vn_eta_cent_tpc_symmetry", "TPC Charged Particle v_{"+ORDER_N_STR+"};Centrality;#eta", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 40, -2, 2);
-  TProfile2D *p2_vn_yCM_cent_de = new TProfile2D("p2_vn_yCM_cent_de", "Deuteron v_{"+ORDER_N_STR+"};Centrality;y-y_{mid}", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 20, -1, 1);
-  TProfile2D *p2_vn_yCM_cent_tr = new TProfile2D("p2_vn_yCM_cent_tr", "Triton v_{"+ORDER_N_STR+"};Centrality;y-y_{mid}", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 20, -1, 1);
+  TProfile2D *p2_vn_yCM_cent_de = new TProfile2D("p2_vn_yCM_cent_de", "Deuteron v_{"+ORDER_N_STR+"};Centrality;y-y_{mid}", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 40, -2, 2);
+  TProfile2D *p2_vn_yCM_cent_tr = new TProfile2D("p2_vn_yCM_cent_tr", "Triton v_{"+ORDER_N_STR+"};Centrality;y-y_{mid}", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 40, -2, 2);
   
   TProfile2D *p2_vn_pT_cent_pp = new TProfile2D("p2_vn_pT_cent_pp", "#pi^{+} v_{"+ORDER_N_STR+"};Centrality;p_{T}", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 10, 0, 2);
   TProfile2D *p2_vn_pT_cent_pm = new TProfile2D("p2_vn_pT_cent_pm", "#pi^{-} v_{"+ORDER_N_STR+"};Centrality;p_{T}", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 10, 0, 2);
@@ -831,14 +840,14 @@ int main(int argc, char *argv[])
   TProfile2D *p2_vn_pToverA_cent_tr = new TProfile2D("p2_vn_pToverA_cent_tr", "Triton v_{"+ORDER_N_STR+"};Centrality;p_{T}/A", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 15, 0, 2.5);
   */
 
-  TProfile2D *p2_vn_pT_vs_yCM_pp = new TProfile2D("p2_vn_pT_vs_yCM_pp", "#pi^{+} v_{3};y-y_{mid};p_{T} (GeV/c)", 20, -1.0, 1.0, 10, 0.0, 2.0);
-  TProfile2D *p2_vn_pT_vs_yCM_pm = new TProfile2D("p2_vn_pT_vs_yCM_pm", "#pi^{-} v_{3};y-y_{mid};p_{T} (GeV/c)", 20, -1.0, 1.0, 10, 0.0, 2.0);
-  //TProfile2D *p2_vn_pT_vs_yCM_kp = new TProfile2D("p2_vn_pT_vs_yCM_kp", "K^{+} v_{3};y-y_{mid};p_{T} (GeV/c)",   20, -1.0, 1.0, 10, 0.0, 2.0);
-  //TProfile2D *p2_vn_pT_vs_yCM_km = new TProfile2D("p2_vn_pT_vs_yCM_km", "K^{-} v_{3};y-y_{mid};p_{T} (GeV/c)",   20, -1.0, 1.0, 10, 0.0, 2.0);
-  TProfile2D *p2_vn_pT_vs_yCM_pr = new TProfile2D("p2_vn_pT_vs_yCM_pr", "Proton v_{3};y-y_{mid};p_{T} (GeV/c)",  20, -1.0, 1.0, 10, 0.0, 2.5);
-  TProfile2D *p2_vn_pT_vs_yCM_pbar = new TProfile2D("p2_vn_pT_vs_yCM_pbar", "Anti-proton v_{3};y-y_{mid};p_{T} (GeV/c)",  20, -1.0, 1.0, 10, 0.0, 2.5);
+  TProfile2D *p2_vn_pT_vs_yCM_pp = new TProfile2D("p2_vn_pT_vs_yCM_pp", "#pi^{+} v_{3};y-y_{mid};p_{T} (GeV/c)", 40, -2.0, 2.0, 10, 0.0, 2.0);
+  TProfile2D *p2_vn_pT_vs_yCM_pm = new TProfile2D("p2_vn_pT_vs_yCM_pm", "#pi^{-} v_{3};y-y_{mid};p_{T} (GeV/c)", 40, -2.0, 2.0, 10, 0.0, 2.0);
+  //TProfile2D *p2_vn_pT_vs_yCM_kp = new TProfile2D("p2_vn_pT_vs_yCM_kp", "K^{+} v_{3};y-y_{mid};p_{T} (GeV/c)",   40, -2.0, 2.0, 10, 0.0, 2.0);
+  //TProfile2D *p2_vn_pT_vs_yCM_km = new TProfile2D("p2_vn_pT_vs_yCM_km", "K^{-} v_{3};y-y_{mid};p_{T} (GeV/c)",   40, -2.0, 2.0, 10, 0.0, 2.0);
+  TProfile2D *p2_vn_pT_vs_yCM_pr = new TProfile2D("p2_vn_pT_vs_yCM_pr", "Proton v_{3};y-y_{mid};p_{T} (GeV/c)",  40, -2.0, 2.0, 10, 0.0, 2.5);
+  TProfile2D *p2_vn_pT_vs_yCM_pbar = new TProfile2D("p2_vn_pT_vs_yCM_pbar", "Anti-proton v_{3};y-y_{mid};p_{T} (GeV/c)",  40, -2.0, 2.0, 10, 0.0, 2.5);
   //TProfile2D *p2_vn_pT_vs_yCM_de = new TProfile2D("p2_vn_pT_vs_yCM_de", "Deuteron v_{3};y-y_{mid};p_{T} (GeV/c)",20, -1.0, 1.0, 10, 0.0, 2.5);
-  //TProfile2D *p2_vn_pT_vs_yCM_tr = new TProfile2D("p2_vn_pT_vs_yCM_tr", "Triton v_{3};y-y_{mid};p_{T} (GeV/c)",  20, -1.0, 1.0, 10, 0.0, 2.5);
+  //TProfile2D *p2_vn_pT_vs_yCM_tr = new TProfile2D("p2_vn_pT_vs_yCM_tr", "Triton v_{3};y-y_{mid};p_{T} (GeV/c)",  40, -2.0, 2.0, 10, 0.0, 2.5);
 
 
   TProfile2D *p2_vn_KT_cent_pp = new TProfile2D("p2_vn_KT_cent_pp", "#pi^{+} v_{"+ORDER_N_STR+"};Centrality;m_{T}-m_{0}", CENT_BINS, FIRST_CENT, FIRST_CENT+CENT_BINS, 10, 0, 2);
@@ -896,7 +905,9 @@ int main(int argc, char *argv[])
   TH2D *h2_dEdx_vs_qp_id_de = new TH2D("h2_dEdx_vs_qp_id_de", ";|p| (GeV/c);dE/dx (keV/cm)", 25, 0.0, 2.5, 500, 0.0, 20.0);
   TH2D *h2_dEdx_vs_qp_id_tr = new TH2D("h2_dEdx_vs_qp_id_tr", ";|p| (GeV/c);dE/dx (keV/cm)", 25, 0.0, 2.5, 500, 0.0, 20.0);
 
-  TH2D *h2_nSigp_vs_mom = new TH2D("h2_nSigp_vs_mom", ";|p| (GeV/c);n#sigma_{p}", 40, 0.0, 4.0, 600, -3.0, 3.0);
+  //TH2D *h2_nSigpr_vs_mom = new TH2D("h2_nSigpr_vs_mom", ";|p| (GeV/c);n#sigma_{p}", 40, 0.0, 4.0, 600, -3.0, 3.0);
+  //TH2D *h2_nSigpi_vs_mom = new TH2D("h2_nSigpi_vs_mom", ";|p| (GeV/c);n#sigma_{#pi}", 40, 0.0, 4.0, 600, -3.0, 3.0);
+  //TH2D *h2_nSigka_vs_mom = new TH2D("h2_nSigka_vs_mom", ";|p| (GeV/c);n#sigma_{k}", 40, 0.0, 4.0, 600, -3.0, 3.0);
   TH2D *h2_zd_vs_mom = new TH2D("h2_zd_vs_mom", ";|p| (GeV/c);z_{d}", 40, 0.0, 4.0, 140, -0.7, 0.7);
   TH2D *h2_zt_vs_mom = new TH2D("h2_zt_vs_mom", ";|p| (GeV/c);z_{t}", 40, 0.0, 4.0, 140, -0.7, 0.7);
   
@@ -1090,7 +1101,8 @@ int main(int argc, char *argv[])
       // At this point, all bad runs and bad trigger events are removed.
       // Now check event vertex
       TVector3 pVtx(f_xvtx, f_yvtx, f_zvtx);
-      Double_t d_rvtx = TMath::Sqrt(f_xvtx * f_xvtx + (f_yvtx + 2) * (f_yvtx + 2));
+      //Double_t d_rvtx = TMath::Sqrt(f_xvtx * f_xvtx + (f_yvtx + 2) * (f_yvtx + 2));
+      Double_t d_rvtx = TMath::Sqrt(f_xvtx * f_xvtx + (f_yvtx) * (f_yvtx));
       
       h_zvtx->Fill(f_zvtx); // All events that pass minbias and wide TreeMaker cuts. Possibly move this past Vz cut.
 
@@ -1324,22 +1336,37 @@ int main(int argc, char *argv[])
 	      //=========================================================
 	      //          PID Cuts
 	      //=========================================================
+	      Double_t d_rapidity_mock = FlowUtils::rapidity(d_px, d_py, d_pz, D_M0_PR);
+	      h2_vs_nSigmaPr_vs_p->Fill(d_mom,d_nSigmaPr);
+	      h2_vs_nSigmaKa_vs_p->Fill(d_mom,d_nSigmaKa);
+	      h2_vs_nSigmaPi_vs_p->Fill(d_mom,d_nSigmaPi);
+	      h2_vs_nSigmaPr_vs_pt->Fill(d_pT,d_nSigmaPr);
+	      h2_vs_nSigmaKa_vs_pt->Fill(d_pT,d_nSigmaKa);
+	      h2_vs_nSigmaPi_vs_pt->Fill(d_pT,d_nSigmaPi);
+	      h3_vs_nSigmaPr_vs_y_vs_pt->Fill(d_rapidity_mock,d_pT,d_nSigmaPr);
+	      if (s_charge <= 1 && s_charge >= -1) h3_dEdx_vs_qpt->Fill(d_rapidity_mock,s_charge * d_pT, d_dEdx);
+	      if (s_charge <= 1 && s_charge >= -1) h3_dEdx_vs_qp->Fill(d_rapidity_mock,s_charge * d_mom, d_dEdx);
+
 	      Bool_t pion   = false;
 	      Bool_t kaon   = false;
-	      Bool_t proton = (d_nSigmaPr > configs.nSig_pr_low) && (d_nSigmaPr < configs.nSig_pr_high) && (s_charge == 1);
-	      Bool_t pbar = (d_nSigmaPr > configs.nSig_pr_low) && (d_nSigmaPr < configs.nSig_pr_high) && (s_charge == -1);
+	      Bool_t proton = (d_nSigmaPr > configs.nSig_pr_low) && (d_nSigmaPr < configs.nSig_pr_high) && (s_charge == 1) && (d_mom < 1.4);
+	      Bool_t pbar = (d_nSigmaPr > configs.nSig_pr_low) && (d_nSigmaPr < configs.nSig_pr_high) && (s_charge == -1) && (d_mom < 1.4);
 	      //Bool_t proton = false;
-	      Bool_t deuteron = false;
-	      Bool_t triton   = false;
-	      //Bool_t deuteron = (d_zDeuteron > configs.z_de_low) && (d_zDeuteron < configs.z_de_high);
-	      //Bool_t triton   = (d_zTriton > configs.z_tr_low) && (d_zTriton < configs.z_tr_high);
+	      //Bool_t deuteron = false;
+	      //Bool_t triton   = false;
+	      Bool_t deuteron = (d_zDeuteron > configs.z_de_low) && (d_zDeuteron < configs.z_de_high);
+	      Bool_t triton   = (d_zTriton > configs.z_tr_low) && (d_zTriton < configs.z_tr_high);
 
 	      if (tofTrack)
 		{
 		  //proton = false; // vete cut on ToF
-	          /*proton = (d_nSigmaPr > configs.nSig_pr_low) && (d_nSigmaPr < configs.nSig_pr_high) && (s_charge == 1) &&
+	          proton = (d_nSigmaPr > configs.nSig_pr_low) && (d_nSigmaPr < configs.nSig_pr_high) && (s_charge == 1) && (d_mom >= 1.4) &&
 	            (d_m2 > configs.m2_pr_low) &&
-		    (d_m2 < configs.m2_pr_high);*/
+		    (d_m2 < configs.m2_pr_high);
+
+	          pbar = (d_nSigmaPr > configs.nSig_pr_low) && (d_nSigmaPr < configs.nSig_pr_high) && (s_charge == -1) && (d_mom >= 1.4) &&
+	            (d_m2 > configs.m2_pr_low) &&
+		    (d_m2 < configs.m2_pr_high);
 
 		  pion = (d_nSigmaPi > configs.nSig_pi_low) &&
 		    (d_nSigmaPi < configs.nSig_pi_high) &&
@@ -1350,7 +1377,7 @@ int main(int argc, char *argv[])
 		    (d_nSigmaKa < configs.nSig_ka_high) &&
 		    (d_m2 > configs.m2_ka_low) &&
 		    (d_m2 < configs.m2_ka_high);
-		  /*
+		  
 		  deuteron = (d_zDeuteron > configs.z_de_low) &&
 		    (d_zDeuteron < configs.z_de_high) &&
 		    (d_m2 > configs.m2_de_low) &&
@@ -1360,7 +1387,7 @@ int main(int argc, char *argv[])
 		  (d_zTriton < configs.z_tr_high) &&
 		    (d_m2 > configs.m2_tr_low) &&
 		    (d_m2 < configs.m2_tr_high);
-		  */
+		  
 		}
 
 	      // 3.0 GeV d and t PID
@@ -1382,7 +1409,7 @@ int main(int argc, char *argv[])
 
 
 
-		  /*
+		  
 		  //  DEUTERON
 		  if (d_mom >= 0.4 && d_mom < 3.0)
 		    {
@@ -1421,9 +1448,9 @@ int main(int argc, char *argv[])
 			  d_m2 < configs.m2_de_high)
 			deuteron = true;
 		    }
-		  */
+		  
 
-		  /*
+		  
 		  // TRITON
 		  if (d_mom >= 1.0 && d_mom < 4.0)
 		    {
@@ -1466,7 +1493,7 @@ int main(int argc, char *argv[])
 			  d_m2 < configs.m2_tr_high)
 			triton = true;
 		    }
-		  */
+		  
 
 		}
 	      // 7.2 GeV d and t PID
@@ -1494,7 +1521,7 @@ int main(int argc, char *argv[])
 		}
 		  
 
-		  /*
+		  
 		    if (deuteron && proton) 
 		    { 
 		    if (TMath::Abs(d_zDeuteron) < TMath::Abs(d_nSigmaPr)) { proton = false; }
@@ -1513,7 +1540,7 @@ int main(int argc, char *argv[])
 		    else if (TMath::Abs(d_zDeuteron) == TMath::Abs(d_zTriton)) { triton = false; deuteron = false; }
 		    else { deuteron = false; }
 		    }
-		  */
+		  
 
 	      if (deuteron && triton) { deuteron = false; triton = false; } // Ignore tags of both d and t.
 	      if (deuteron && proton) { proton = false; } // d and t will have some contamination from p, but that has been minimized
@@ -1522,16 +1549,18 @@ int main(int argc, char *argv[])
 
 	      //if (pion && proton)   { pion = false; }
 	      if (pion && proton)   { proton = false; }
-	      //if (pion && deuteron) { deuteron = false; }
-	      //if (pion && triton)   { triton = false; }
+	      if (pion && deuteron) { deuteron = false; }
+	      if (pion && triton)   { triton = false; }
 	      
 	      //if (kaon && proton)   { kaon = false; }
 	      if (kaon && proton)   { proton = false; }
-	      //if (kaon && deuteron) { deuteron = false; }
-	      //if (kaon && triton)   { triton = false; }
+	      if (kaon && deuteron) { deuteron = false; }
+	      if (kaon && triton)   { triton = false; }
 
-	      //if (deuteron && proton) { proton = false; }
-	      //if (triton && proton) { proton = false; }
+	      if (deuteron && proton) { proton = false; }
+	      if (triton && proton) { proton = false; }
+	      // momentum cut to keep high purity of proton
+	      //if (d_mom > 1.4) { proton = false; }
 	      //=========================================================
 	      //          END PID Cuts
 	      //=========================================================
@@ -1547,7 +1576,9 @@ int main(int argc, char *argv[])
 
 	      if (!pion && !kaon) 
 		{
-		  h2_nSigp_vs_mom->Fill(d_mom, d_nSigmaPr);
+		  //h2_nSigpi_vs_mom->Fill(d_mom, d_nSigmaPi);
+		  //h2_nSigka_vs_mom->Fill(d_mom, d_nSigmaKa);
+		  //h2_nSigpr_vs_mom->Fill(d_mom, d_nSigmaPr);
 		  h2_zd_vs_mom->Fill(d_mom, d_zDeuteron);
 		  h2_zt_vs_mom->Fill(d_mom, d_zTriton);
 		}
@@ -2442,9 +2473,11 @@ int main(int argc, char *argv[])
 		  // ALL CHARGED TRACKS
 		  h2_pT_vs_eta_tpc->Fill(jthEta, jthpT);
 		      // RAPIDITY DEPENDENT PLOT
-		  if (jthEta > -2.0 && jthEta < 2.0 && 
+		  if (jthEta > -2.0 && jthEta < 2.0 
+				  //&& 
 		      //jthMom < 2.8 && // add the momemtum cut as Zuowen did
-			  jthpT > 0.4 && jthpT < 1.2 )
+			  //jthpT > 0.4 && jthpT < 1.2 
+		     )
 		    { p2_vn_eta_cent_tpc->Fill(centID, jthEta, TMath::Cos(ORDER_N * (jthPhi - psi)) / (resolution)); }
 		      // RAPIDITY SYMMETRIC ACCEPTANCE REGION
 		  if (jthEta > -2.0 && jthEta < 2.0 && 
