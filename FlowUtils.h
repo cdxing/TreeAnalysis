@@ -21,6 +21,7 @@ namespace FlowUtils
     Double_t phi;
     Double_t eta;
     Double_t pT;
+    Double_t mom;
     Double_t KT;
     Double_t weight;
     Double_t rapidity;
@@ -32,6 +33,8 @@ namespace FlowUtils
     Bool_t prTag;
     Bool_t deTag;
     Bool_t trTag;
+    Bool_t he3Tag;
+    Bool_t he4Tag;
 
     Bool_t isInTpcA;
     Bool_t isInTpcB;
@@ -54,6 +57,8 @@ namespace FlowUtils
       prTag = false;
       deTag = false;
       trTag = false;
+      he3Tag = false;
+      he4Tag = false;
 
       isInTpcA = false;
       isInTpcB = false;
@@ -866,6 +871,268 @@ namespace FlowUtils
     return triton;
   }// End momDepTritonID_highSystematics()
 
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+  Bool_t momDepHelium3ID(Double_t sqrt_s_NN, Double_t momentum, Double_t zHelium3, 
+			  Bool_t tofTrack, Double_t m2, 
+			  Double_t zLowBoundWithTof, Double_t zHighBoundWithTof, Double_t m2LowBoundWithTof, Double_t m2HighBoundWithTof)
+  {
+    Bool_t helium3 = false;
+
+    if (sqrt_s_NN == 3.0)
+      {
+	//if (momentum >= 1.2 && momentum < 4.0)
+	//  {
+	//    if      (momentum >= 1.2 && momentum < 1.3 && zHelium3 > -0.174973 && zHelium3 < 0.219811 ) helium3 = true;
+	//    else if (momentum >= 1.3 && momentum < 1.4 && zHelium3 > -0.193474 && zHelium3 < 0.203659 ) helium3 = true;
+	//    else if (momentum >= 1.4 && momentum < 1.5 && zHelium3 > -0.210412 && zHelium3 < 0.189912 ) helium3 = true;
+	//    else if (momentum >= 1.5 && momentum < 1.6 && zHelium3 > -0.218264 && zHelium3 < 0.184193 ) helium3 = true;
+	//    else if (momentum >= 1.6 && momentum < 1.7 && zHelium3 > -0.225671 && zHelium3 < 0.177405 ) helium3 = true;
+	//    else if (momentum >= 1.7 && momentum < 1.8 && zHelium3 > -0.180725 && zHelium3 < 0.171766 ) helium3 = true;
+	//    else if (momentum >= 1.8 && momentum < 1.9 && zHelium3 > -0.15612  && zHelium3 < 0.163459  ) helium3 = true;
+	//    else if (momentum >= 1.9 && momentum < 2.0 && zHelium3 > -0.144579 && zHelium3 < 0.15528  ) helium3 = true;
+	//    else if (momentum >= 2.0 && momentum < 2.1 && zHelium3 > -0.137931 && zHelium3 < 0.146124 ) helium3 = true;
+	//    else if (momentum >= 2.1 && momentum < 2.2 && zHelium3 > -0.138352 && zHelium3 < 0.135093 ) helium3 = true;
+	//    else if (momentum >= 2.2 && momentum < 2.3 && zHelium3 > -0.138604 && zHelium3 < 0.121381 ) helium3 = true;
+	//    else if (momentum >= 2.3 && momentum < 2.4 && zHelium3 > -0.139353 && zHelium3 < 0.113312 ) helium3 = true;
+	//    else if (momentum >= 2.4 && momentum < 2.5 && zHelium3 > -0.138938 && zHelium3 < 0.108548 ) helium3 = true;
+	//    else if (momentum >= 2.5 && momentum < 2.6 && zHelium3 > -0.145164 && zHelium3 < 0.103062 ) helium3 = true;
+	//    else if (momentum >= 2.6 && momentum < 2.7 && zHelium3 > -0.14637  && zHelium3 < 0.0997647 ) helium3 = true;
+	//    else if (momentum >= 2.7 && momentum < 2.8 && zHelium3 > -0.148973 && zHelium3 < 0.0967642) helium3 = true;
+	//    else if (momentum >= 2.8 && momentum < 2.9 && zHelium3 > -0.154196 && zHelium3 < 0.0961341) helium3 = true;
+	//    else if (momentum >= 2.9 && momentum < 3.0 && zHelium3 > -0.155425 && zHelium3 < 0.0941989) helium3 = true;
+	//    else if (momentum >= 3.0 && momentum < 3.1 && zHelium3 > -0.166456 && zHelium3 < 0.102843 ) helium3 = true;
+	//    else if (momentum >= 3.1 && momentum < 3.2 && zHelium3 > -0.176207 && zHelium3 < 0.109944 ) helium3 = true;
+	//    else if (momentum >= 3.2 && momentum < 3.3 && zHelium3 > -0.176293 && zHelium3 < 0.119202 ) helium3 = true;
+	//    else if (momentum >= 3.3 && momentum < 3.4 && zHelium3 > -0.187081 && zHelium3 < 0.133177 ) helium3 = true;
+	//    else if (momentum >= 3.4 && momentum < 3.5 && zHelium3 > -0.202358 && zHelium3 < 0.144478 ) helium3 = true;
+	//    else if (momentum >= 3.5 && momentum < 3.6 && zHelium3 > -0.210469 && zHelium3 < 0.152257 ) helium3 = true;
+	//    else if (momentum >= 3.6 && momentum < 3.7 && zHelium3 > -0.202372 && zHelium3 < 0.158174 ) helium3 = true;
+	//    else if (momentum >= 3.7 && momentum < 3.8 && zHelium3 > -0.230199 && zHelium3 < 0.161417 ) helium3 = true;
+	//    else if (momentum >= 3.8 && momentum < 3.9 && zHelium3 > -0.219143 && zHelium3 < 0.162327 ) helium3 = true;
+	//    else if (momentum >= 3.9 && momentum < 4.0 && zHelium3 > -0.160178 && zHelium3 < 0.156248 ) helium3 = true;
+	//  }
+	//else if (tofTrack)
+	//  {
+	//    if (zHelium3 > zLowBoundWithTof && zHelium3 < zHighBoundWithTof &&
+	//	m2 > m2LowBoundWithTof && m2 < m2HighBoundWithTof)
+	//      helium3 = true;
+	//  }
+
+        Float_t pBins[51] = {
+          0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7,
+          1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7,
+          2.8, 2.9, 3, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7,
+          3.8, 3.9, 4, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7,
+          4.8, 4.9, 5, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 200};
+
+        Int_t theBin = -1;
+
+        for(Int_t no=0; no<50; no++) {
+          if(2*momentum>=pBins[no] && 2*momentum<pBins[no+1]) {
+            theBin = no;}
+        }
+
+        if(theBin == -1) return kFALSE;
+
+        Float_t zMeans[50] = {
+        -0.114156, -0.0668843, -0.0319003, -0.00612763, 0.00931991, 0.0290784, 0.048698, 0.0652863, 0.0778636, 0.0881528,
+        0.0956031, 0.103156, 0.105987, 0.106568, 0.111138, 0.123473, 0.127258, 0.128315, 0.129744, 0.130328,
+        0.130626, 0.13207, 0.134404, 0.137191, 0.138279, 0.139403, 0.141749, 0.143571, 0.143647, 0.143898,
+        0.144604, 0.145816, 0.145539, 0.144733, 0.144168, 0.143721, 0.14389, 0.14273, 0.14181, 0.141252,
+        0.142175, 0.142849, 0.143353, 0.142981, 0.143135, 0.143533, 0.143762, 0.144836, 0.144752, 0.144993};
+    
+            Float_t he3sigma = zHelium3 - zMeans[theBin];
+            //Float_t he3sigma = mHe3Z;
+    
+        // z cut
+        Float_t lowZ[47] = {
+          -0.05, -0.06, -0.07, -0.08, -0.1, -0.12, -0.15, -0.18, -0.2, -0.23,
+          -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23,
+          -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23,
+          -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23,
+          -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23};
+        Float_t highZ[47] =  {
+          0.25, 0.24, 0.23, 0.22, 0.2, 0.21, 0.21, 0.21, 0.23, 0.22,
+          0.24, 0.24, 0.24, 0.23, 0.22, 0.21, 0.2, 0.19, 0.18, 0.17,
+          0.16, 0.15, 0.14, 0.13, 0.12, 0.11, 0.1, 0.09, 0.09, 0.09,
+          0.09, 0.09, 0.09, 0.09, 0.09, 0.08, 0.07, 0.07, 0.06, 0.06,
+          0.05, 0.04, 0.03, 0.03, 0.02, 0 , 0};
+        //      if(2*mP< 2.2 && he3sigma>=-0.1 && he3sigma<0.15)
+        //              return 1;
+        //      else if(2*mP>2.2 && he3sigma>=-0.15 && he3sigma<0.1)
+        //              return 1;
+          if(2*momentum<1.2 && he3sigma>=-0.05 && he3sigma<0.25)
+            //return 1;
+	    helium3 = true;
+          else if(2*momentum>1.2 && he3sigma>=lowZ[theBin-4] && he3sigma<highZ[theBin-4])
+            //return 1;
+	    helium3 = true;
+                //else if(2*momentum>5.5 && he3sigma>=-0.3 && he3sigma<0.3 && mMass2>=1.4 && mMass2<=2.4)// defualt 1.4 < m2 < 2.4            
+          //  return 1;
+        
+                //return -1;
+      }// End if (3.0 GeV)
+
+    return helium3;
+  }// End momDepDeuteronID()
+  
+
+// psn0770 PID
+ // Int_t CutHe3(Long64_t entry){
+ //       Float_t pBins[51] = {
+ //         0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7,
+ //         1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7,
+ //         2.8, 2.9, 3, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7,
+ //         3.8, 3.9, 4, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7,
+ //         4.8, 4.9, 5, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 200};
+
+ //       Int_t theBin = -1;
+
+ //       for(Int_t no=0; no<50; no++) {
+ //         if(2*mP>=pBins[no] && 2*mP<pBins[no+1]) {
+ //           theBin = no;}
+ //       }
+
+ //       if(theBin == -1) return kFALSE;
+
+ //       Float_t zMeans[50] = {
+ //       -0.114156, -0.0668843, -0.0319003, -0.00612763, 0.00931991, 0.0290784, 0.048698, 0.0652863, 0.0778636, 0.0881528,
+ //       0.0956031, 0.103156, 0.105987, 0.106568, 0.111138, 0.123473, 0.127258, 0.128315, 0.129744, 0.130328,
+ //       0.130626, 0.13207, 0.134404, 0.137191, 0.138279, 0.139403, 0.141749, 0.143571, 0.143647, 0.143898,
+ //       0.144604, 0.145816, 0.145539, 0.144733, 0.144168, 0.143721, 0.14389, 0.14273, 0.14181, 0.141252,
+ //       0.142175, 0.142849, 0.143353, 0.142981, 0.143135, 0.143533, 0.143762, 0.144836, 0.144752, 0.144993};
+ //   
+ //           Float_t he3sigma = mHe3Z - zMeans[theBin];
+ //           //Float_t he3sigma = mHe3Z;
+ //   
+ //       // z cut
+ //       Float_t lowZ[47] = {
+ //         -0.05, -0.06, -0.07, -0.08, -0.1, -0.12, -0.15, -0.18, -0.2, -0.23,
+ //         -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23,
+ //         -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23,
+ //         -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23,
+ //         -0.23, -0.23, -0.23, -0.23, -0.23, -0.23, -0.23};
+ //       Float_t highZ[47] =  {
+ //         0.25, 0.24, 0.23, 0.22, 0.2, 0.21, 0.21, 0.21, 0.23, 0.22,
+ //         0.24, 0.24, 0.24, 0.23, 0.22, 0.21, 0.2, 0.19, 0.18, 0.17,
+ //         0.16, 0.15, 0.14, 0.13, 0.12, 0.11, 0.1, 0.09, 0.09, 0.09,
+ //         0.09, 0.09, 0.09, 0.09, 0.09, 0.08, 0.07, 0.07, 0.06, 0.06,
+ //         0.05, 0.04, 0.03, 0.03, 0.02, 0 , 0};
+ //       //      if(2*mP< 2.2 && he3sigma>=-0.1 && he3sigma<0.15)
+ //       //              return 1;
+ //       //      else if(2*mP>2.2 && he3sigma>=-0.15 && he3sigma<0.1)
+ //       //              return 1;
+ //         if(2*mP<1.2 && he3sigma>=-0.05 && he3sigma<0.25)
+ //           return 1;
+ //         else if(2*mP>1.2 && he3sigma>=lowZ[theBin-4] && he3sigma<highZ[theBin-4])
+ //           return 1;
+ //               //else if(2*mP>5.5 && he3sigma>=-0.3 && he3sigma<0.3 && mMass2>=1.4 && mMass2<=2.4)// defualt 1.4 < m2 < 2.4            
+ //         //  return 1;
+ //       
+ //               return -1;
+ // }
+
+  Bool_t momDepHelium4ID(Double_t sqrt_s_NN, Double_t momentum, Double_t zHelium4, 
+			  Bool_t tofTrack, Double_t m2, 
+			  Double_t zLowBoundWithTof, Double_t zHighBoundWithTof, Double_t m2LowBoundWithTof, Double_t m2HighBoundWithTof)
+  {
+    Bool_t helium4 = false;
+
+    if (sqrt_s_NN == 3.0)
+      {
+	const Float_t he4P_cut = 5.45;
+	const Float_t he4M2_max = 5;  
+	const Float_t he4M2_min = 2.65;
+
+        //Float_t pBins[51] = {
+        //  0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7,
+        //  1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7,
+        //  2.8, 2.9, 3, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7,
+        //  3.8, 3.9, 4, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7,
+        //  4.8, 4.9, 5, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 200};
+        Float_t pBins[51] = {
+        0.8, 0.95, 1.1, 1.25, 1.4, 1.55, 1.7, 1.85, 2, 2.15,
+        2.3, 2.45, 2.6, 2.75, 2.9, 3.05, 3.2, 3.35, 3.5, 3.65,
+        3.8, 3.95, 4.1, 4.25, 4.4, 4.55, 4.7, 4.85, 5, 5.15,
+        5.3, 5.45, 5.6, 5.75, 5.9, 6.05, 6.2, 6.35, 6.5, 6.65,
+        6.8, 6.95, 7.1, 7.25, 7.4, 7.55, 7.7, 7.85, 8, 8.15, 200};
+
+
+
+        Int_t theBin = -1;
+
+        for(Int_t no=0; no<50; no++) {
+          if(2*momentum>=pBins[no] && 2*momentum<pBins[no+1]) {
+            theBin = no;}
+        }
+
+        if(theBin == -1) return kFALSE;
+
+        Float_t zMeans[50] = {
+        -0.15, -0.114927, -0.0548892, -0.0190104, 0.00837644, 0.0243054, 0.0429134, 0.0618828, 0.0772831, 0.0903534,
+        0.101779, 0.110558, 0.116466, 0.115142, 0.116884, 0.117809, 0.120108, 0.121945, 0.122243, 0.123147,
+        0.120635, 0.121858, 0.122692, 0.122756, 0.125127, 0.129557, 0.132187, 0.135696, 0.139185, 0.147093,
+        0.15, 0.141601, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15,
+        0.15, 0.131814, 0.15, 0.15, 0.112822, 0.114802, 0.11832, 0.119631, 0.123936, 0.130011};
+
+            Float_t he4sigma = zHelium4 - zMeans[theBin];
+            //Float_t he4sigma = mHe4Z;
+    
+        // z cut
+        Float_t lowZ[30] = {
+          -0.2, -0.2, -0.2, -0.19, -0.18, -0.16, -0.15, -0.14, -0.13, -0.12,
+          -0.11, -0.1, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02,
+          -0.01, 0.0, 0.01, 0.02, 0.02, 0.03, 0.04, -0.2, -0.2, -0.2};
+        Float_t highZ[30] = {
+          0.3, 0.3, 0.3, 0.25, 0.25, 0.25, 0.25, 0.25, 0.21, 0.21,
+          0.2, 0.15, 0.17, 0.2, 0.19, 0.18, 0.17, 0.17, 0.13, 0.13,
+          0.13, 0.13, 0.13, 0.12, 0.1, 0.09, 0.08, 0.3, 0.3, 0.3};
+
+        //      if(2*mP< 2.2 && he3sigma>=-0.1 && he3sigma<0.15)
+        //              return 1;
+        //      else if(2*mP>2.2 && he3sigma>=-0.15 && he3sigma<0.1)
+        //              return 1;
+
+        if(2*momentum<1.4 && he4sigma>=-0.2 && he4sigma<0.3)
+	    helium4 = true;
+        else if(2*momentum>1.4 && 2*momentum<he4P_cut && he4sigma>=lowZ[theBin-4] && he4sigma<highZ[theBin-4])
+	    helium4 = true;
+        else if(2*momentum>he4P_cut && he4sigma>=-0.3 && he4sigma<0.3 && m2<=he4M2_max && m2>=he4M2_min)
+	    helium4 = true;
+
+                //return -1;
+      }// End if (3.0 GeV)
+
+    return helium4;
+  }// End momDepDeuteronID()
 
 }// End namespace FlowUtils
 

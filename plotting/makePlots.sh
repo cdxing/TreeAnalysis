@@ -1,8 +1,8 @@
 #!/bin/bash
 
 
-jobID="B788126DD978DB33CEB64D53DD6BEFAD"
-order_n="3"
+jobID="Normal"
+order_n="1"
 
 #root -l -b -q plotAll.cxx\(\"${jobID}\"\)
 #root -l -b -q m2BypTBins.cxx\(\"${jobID}\"\)
