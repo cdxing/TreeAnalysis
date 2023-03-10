@@ -1,7 +1,8 @@
 #!/bin/bash
 
 
-jobID="B788126DD978DB33CEB64D53DD6BEFAD"
+#jobID="B788126DD978DB33CEB64D53DD6BEFAD"
+jobID="Normal"
 order_n="3"
 
 #root -l -b -q plotAll.cxx\(\"${jobID}\"\)
